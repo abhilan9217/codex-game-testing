@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guess the Number</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    #result {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    #restart {
+      margin-top: 10px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Guess the Number</h1>
+  <p>I'm thinking of a number between 1 and 100.</p>
+  <input type="number" id="guess" min="1" max="100" placeholder="Enter your guess">
+  <button id="submit">Submit Guess</button>
+  <div id="result"></div>
+  <button id="restart">Restart Game</button>
+
+  <script>
+    let target = Math.floor(Math.random() * 100) + 1;
+    let attempts = 0;
+
+    const guessInput = document.getElementById('guess');
+    const resultDiv = document.getElementById('result');
+    const restartBtn = document.getElementById('restart');
+    const submitBtn = document.getElementById('submit');
+
+    submitBtn.addEventListener('click', handleGuess);
+    restartBtn.addEventListener('click', init);
+
+    function handleGuess() {
+      const guess = parseInt(guessInput.value, 10);
+      if (isNaN(guess)) {
+        resultDiv.textContent = 'Please enter a valid number.';
+        return;
+      }
+      attempts++;
+      if (guess === target) {
+        resultDiv.textContent = `Correct! You guessed it in ${attempts} attempts.`;
+        submitBtn.disabled = true;
+        restartBtn.style.display = 'inline-block';
+      } else if (guess < target) {
+        resultDiv.textContent = 'Too low!';
+      } else {
+        resultDiv.textContent = 'Too high!';
+      }
+    }
+
+    function init() {
+      target = Math.floor(Math.random() * 100) + 1;
+      attempts = 0;
+      resultDiv.textContent = '';
+      guessInput.value = '';
+      submitBtn.disabled = false;
+      restartBtn.style.display = 'none';
+    }
+  </script>
+</body>
+</html>
