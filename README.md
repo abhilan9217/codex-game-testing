@@ -1,3 +1,6 @@
-# Memory Game
+# Web Games
 
-Open `index.html` in your browser to play a simple 4x4 memory matching game.
+This repository contains small browser-based games.
+
+- **Memory Game** - open `index.html` to play a simple 4x4 matching game.
+- **Guess the Number** - open `guess.html` to try to guess the randomly selected number between 1 and 100.
